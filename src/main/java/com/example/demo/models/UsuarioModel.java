@@ -5,7 +5,6 @@ import javax.persistence.*;
 @Entity
 @Table(name = "usuario")
 public class UsuarioModel {
-    
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(unique = true, nullable = false)
@@ -14,6 +13,10 @@ public class UsuarioModel {
     private String nombre;
     private String email;
     private Integer prioridad;
+
+    @ManyToOne(fetch = FetchType.EAGER, optional = false)
+    @JoinColumn(name = "location_id")
+    private Location location;
     
     public Long getId() {
         return id;
@@ -45,6 +48,14 @@ public class UsuarioModel {
 
     public void setPrioridad(Integer prioridad) {
         this.prioridad = prioridad;
+    }
+
+    public Location getLocation() {
+        return location;
+    }
+
+    public void setLocation(Location location) {
+        this.location = location;
     }
 
 }
